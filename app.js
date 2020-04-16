@@ -9,7 +9,7 @@ var express         = require("express"),
     Campground      = require("./models/campground"),
     Comment         = require("./models/comment"),
     User            = require("./models/user"),
-    seedDB          = require("./seeds")
+    seedDB          = require("./seeds");
 
 // requiring routes
 var commentRoutes       = require("./routes/comments"),
@@ -17,9 +17,14 @@ var commentRoutes       = require("./routes/comments"),
     indexRoutes         = require("./routes/index")
     
 // seedDB();
+
 mongoose.set('useUnifiedTopology', true);
-// mongoose.connect("mongodb://localhost/yelp_camp", { useNewUrlParser: true });
-mongoose.connect("mongodb+srv://jmicko:honeysquids@cluster0-8gobu.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
+
+console.log(process.env.DATABASEURL);
+mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
+// mongoose.connect("mongodb+srv://jmicko:honeysquids@cluster0-8gobu.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
+
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
