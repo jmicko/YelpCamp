@@ -14,15 +14,14 @@ var express         = require("express"),
 // requiring routes
 var commentRoutes       = require("./routes/comments"),
     campgroundRoutes    = require("./routes/campgrounds"),
-    indexRoutes         = require("./routes/index")
+    indexRoutes         = require("./routes/index");
     
 // seedDB();
 
 mongoose.set('useUnifiedTopology', true);
 
-console.log(process.env.DATABASEURL);
-mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
-// mongoose.connect("mongodb+srv://jmicko:honeysquids@cluster0-8gobu.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+mongoose.connect(url, { useNewUrlParser: true });
 
 
 app.use(bodyParser.urlencoded({extended: true}));
